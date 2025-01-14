@@ -4,6 +4,9 @@ import { ref } from 'vue';
 import CardCart from './CardCart.vue';
 import { useCartStore } from '@/stores/cartStore';
 
+const cartStore = useCartStore();
+const cartItems = cartStore.cartItems;
+
 const props = defineProps({
   isVisible: {type: Boolean, default: false}
 });
@@ -12,11 +15,14 @@ function closeModal() {
   state.showCart = false;
 }
 
-const cartStore = useCartStore();
-const cartItems = cartStore.cartItems;
+function finish() {
+  if (cartItems.length > 0) {
+    closeModal();
 
-const count = cartStore.totalQt;
-const totalVl = cartStore.totalVle;
+    cartStore.checkout();
+  }
+  
+}
 </script>
 
 <template>
@@ -41,7 +47,7 @@ const totalVl = cartStore.totalVle;
           <p>R$ {{ cartStore.totalVle.toFixed(2) }}</p>
         </div>
         <div class="fr">
-          <button class="btn-finish">Finish</button>
+          <button @click="finish" class="btn-finish">Finish</button>
         </div>
       </div>
     </div>

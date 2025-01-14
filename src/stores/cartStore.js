@@ -53,5 +53,13 @@ export const useCartStore = defineStore('cart', () => {
         }
     }
 
-    return {cartItems, totalVle, totalQt, addItem, removeItem, updateQuantity};
+    function checkout() {
+        cartItems.value.splice(0, cartItems.value.length);
+        totalVle.value = 0;
+        totalQt.value = 0;
+
+        alert('Your purchase has been completed!');
+    }
+
+    return {cartItems, totalVle, totalQt, addItem, removeItem, updateQuantity, checkout};
 });
