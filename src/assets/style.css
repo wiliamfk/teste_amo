@@ -1,0 +1,8 @@
+@import "@fontsource/roboto";
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #dcdcdc;
+    margin: 0;
+    padding: 0;
+}
