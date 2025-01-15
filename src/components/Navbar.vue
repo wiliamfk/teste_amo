@@ -61,7 +61,7 @@ function openCart() {
 .btn-search {
   background: none;
   border: none;
-  color: #2F69FF;
+  color: #474747;
   cursor: pointer;
 }
 
@@ -77,7 +77,7 @@ function openCart() {
   /* margin-right: 10px; */
   background: none;
   border: none;
-  color: #000000;
+  color: #434343;
   font-size: 12pt;
 }
 
@@ -86,7 +86,7 @@ function openCart() {
 }
 
 #txtSearch::placeholder {
-  color: #2F69FF;
+  color: #676767;
 }
 
 #icoSearch {

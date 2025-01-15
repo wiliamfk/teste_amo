@@ -1,5 +1,6 @@
 <script setup>
   import { useCartStore } from '@/stores/cartStore';
+  import state from '@/state/eventBus';
   const product = defineProps(['img', 'id', 'title', 'description', 'price']);
 
   const obj = {id: product?.id, img: product?.img, title: product?.title, description: product?.description, price: product?.price};
@@ -7,6 +8,12 @@
 
   function addProduct() {
     cartStore.addItem(obj);
+    showAlert('Product added successfully!');
+  }
+
+  function showAlert(message) {
+    state.alertMessage = message;
+    state.alertVisible = true;
   }
 </script>
 
@@ -63,6 +70,7 @@
 h5, p {
   padding: 0;
   margin: 0;
+  color: #474747;
 }
 
 .pn-info h5 {
@@ -74,7 +82,7 @@ h5, p {
 .pn-info p {
   font-size: 11pt;
   font-weight: normal;
-  text-align: left;
+  text-align: justify;
 }
 
 .pn-info .price {
@@ -94,7 +102,7 @@ h5, p {
 }
 
 .pn-comprar button {
-  background-color: #2F69FF;
+  background-color: #2352c7;
   color: #ffffff;
   border: none;
   cursor: pointer;

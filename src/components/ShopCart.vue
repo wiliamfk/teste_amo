@@ -8,7 +8,7 @@ const cartStore = useCartStore();
 const cartItems = cartStore.cartItems;
 
 const props = defineProps({
-  isVisible: {type: Boolean, default: false}
+  isVisible: { type: Boolean, default: false }
 });
 
 function closeModal() {
@@ -21,37 +21,41 @@ function finish() {
 
     cartStore.checkout();
   }
-  
+
 }
 </script>
 
 <template>
-  <div v-if="isVisible" class="darkscreen">
-    <div class="ext" @click="closeModal"></div>
-    <div class="pn-cart">
-      <div class="header">
-        <div class="hl">
-          <p><span><font-awesome-icon icon="cart-shopping" /></span>Carrinho</p>
+  <transition name="modal">
+    <div v-if="isVisible" class="darkscreen">
+      <div class="ext" @click="closeModal"></div>
+      <transition name="cart">
+        <div v-if="isVisible" class="pn-cart">
+          <div class="header">
+            <div class="hl">
+              <p><span><font-awesome-icon icon="cart-shopping" /></span>Carrinho</p>
+            </div>
+            <font-awesome-icon icon="xmark" id="btnFechar" @click="closeModal" />
+          </div>
+          <div class="section">
+            <div class="cart-items">
+              <CardCart v-for="item in cartItems" :key="item.id" :product="item" />
+            </div>
+            <button @click="closeModal" class="btn-add-item">Add More Products</button>
+          </div>
+          <div class="footer">
+            <div class="fl">
+              <p>{{ cartStore.totalQt }} products:</p>
+              <p>R$ {{ cartStore.totalVle.toFixed(2) }}</p>
+            </div>
+            <div class="fr">
+              <button @click="finish" class="btn-finish">Finish</button>
+            </div>
+          </div>
         </div>
-        <font-awesome-icon icon="xmark" id="btnFechar" @click="closeModal" />
-      </div>
-      <div class="section">
-        <div class="cart-items">
-          <CardCart v-for="item in cartItems" :key="item.id" :product="item" />
-        </div>
-        <button @click="closeModal" class="btn-add-item">Add More Products</button>
-      </div>
-      <div class="footer">
-        <div class="fl">
-          <p>{{ cartStore.totalQt }} products:</p>
-          <p>R$ {{ cartStore.totalVle.toFixed(2) }}</p>
-        </div>
-        <div class="fr">
-          <button @click="finish" class="btn-finish">Finish</button>
-        </div>
-      </div>
+      </transition>
     </div>
-  </div>
+  </transition>
 </template>
 
 <style scoped>
@@ -64,6 +68,7 @@ function finish() {
   flex-direction: row;
   justify-content: left;
   align-items: center;
+  opacity: 1;
 }
 
 .pn-cart {
@@ -75,6 +80,7 @@ function finish() {
   justify-content: start;
   align-items: center;
   gap: 0.25rem;
+  transform: translateX(0%);
 }
 
 .ext {
@@ -163,7 +169,8 @@ function finish() {
   font-size: 12pt;
 }
 
-.fr, .fl {
+.fr,
+.fl {
   width: 50%;
   height: 100%;
   display: flex;
@@ -196,5 +203,25 @@ function finish() {
   background-color: #cdcdcd;
   color: #353535;
   cursor: pointer;
+}
+
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.cart-enter-active,
+.cart-leave-active {
+  transition: transform 0.5s ease;
+}
+
+.cart-enter-from,
+.cart-leave-to {
+  transform: translateX(100%);
 }
 </style>

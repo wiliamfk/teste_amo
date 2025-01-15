@@ -21,8 +21,8 @@ import CardProduct from '@/components/CardProduct.vue';
   <main>
     <div class="pn-options">
       <ul>
-        <li>Brand <span class="ml-1"><font-awesome-icon icon="chevron-down" /></span></li>
         <li>Category <span class="ml-1"><font-awesome-icon icon="chevron-down" /></span></li>
+        <li>Brand <span class="ml-1"><font-awesome-icon icon="chevron-down" /></span></li>
         <li>Promotions</li>
       </ul>
     </div>
@@ -54,9 +54,7 @@ import CardProduct from '@/components/CardProduct.vue';
   gap: 1.25rem;
   padding: auto;
   margin: 0 auto;
-  /* Centraliza horizontalmente */
   max-width: fit-content;
-  /* Ajusta o tamanho ao conteúdo */
 }
 
 .pn-options {
